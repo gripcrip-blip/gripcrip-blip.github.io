@@ -174,7 +174,7 @@ export const experience = [
   {
     id: 'smartfocus',
     period: '3 years',
-    company: 'Смартфокус',
+    company: 'Digital Agency',
     role: 'Analyst',
     kind: 'role' as const,
     focus: [
