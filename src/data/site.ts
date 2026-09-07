@@ -173,10 +173,10 @@ export const experiments = [
 export const experience = [
   {
     id: 'smartfocus',
-    period: '2023 — now',
-    dates: 'October 2023 — present',
+    period: '3 years',
     company: 'Смартфокус',
     role: 'Analyst',
+    kind: 'role' as const,
     focus: [
       'Marketing and financial analytics for mobile projects',
       'Funnels, cohorts, LTV, Retention, CPA, ROI',
@@ -185,39 +185,14 @@ export const experience = [
     ],
   },
   {
-    id: 'selma',
-    period: '2022 — 2023',
-    dates: 'March 2022 — September 2023',
-    company: 'ЭМЗ ФИРМА СЭЛМА',
-    role: 'Data Engineer',
+    id: 'open-to-work',
+    period: 'Now',
+    company: 'Open to work',
+    role: 'Open to new roles',
+    kind: 'status' as const,
     focus: [
-      'MySQL at multi-million row scale',
-      'ETL, transformation, analytical marts',
-      'SQL optimization and storage structure',
-      'Data quality automation',
-    ],
-  },
-  {
-    id: 'consultant-senior',
-    period: '2016 — 2017',
-    dates: 'February 2016 — March 2017',
-    company: 'КонсультантПлюс',
-    role: 'Senior Key Account Specialist',
-    focus: [
-      'KPI analysis, sales planning, operational analytics',
-      'Client-base and market analysis',
-      'Key accounts, team management, plan control',
-    ],
-  },
-  {
-    id: 'consultant-marketing',
-    period: '2015 — 2016',
-    dates: 'August 2015 — February 2016',
-    company: 'КонсультантПлюс',
-    role: 'Marketing Specialist',
-    focus: [
-      'Key-account marketing operations',
-      'Client database, reporting, HARD KPI tracking',
+      'Data / Marketing Analyst',
+      'Remote · Full-time',
     ],
   },
 ] as const
