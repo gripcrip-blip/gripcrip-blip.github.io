@@ -3,15 +3,24 @@ import { SectionHeading } from '../components/SectionHeading'
 import { useInView } from '../hooks/useInView'
 import { useLanguage } from '../i18n/LanguageProvider'
 
-const relativeChange = [
-  { name: 'CPL', before: 100, after: 70 },
-  { name: 'ROI', before: 100, after: 115 },
+const campaignCharts = [
+  {
+    name: 'CPL',
+    max: 10,
+    before: { value: 10, label: '~$10' },
+    after: { value: 7, label: '~$7' },
+  },
+  {
+    name: 'ROI',
+    max: 80,
+    before: { value: 60, label: '60%' },
+    after: { value: 70, label: '70%' },
+  },
 ]
 
 function CampaignViz() {
   const { t } = useLanguage()
   const { ref, inView } = useInView<HTMLDivElement>(0.35)
-  const max = 130
   const { viz } = t.cases
 
   return (
@@ -23,33 +32,26 @@ function CampaignViz() {
         </p>
       </div>
       <div className="grid grid-cols-2 gap-8 px-2 pb-2 pt-4">
-        {relativeChange.map((row) => (
+        {campaignCharts.map((row) => (
           <div key={row.name}>
-            <div className="flex h-36 items-end gap-3">
-              <div className="flex flex-1 flex-col items-center gap-2">
-                <div className="flex h-28 w-full items-end rounded-md bg-white/5">
-                  <div
-                    className="w-full rounded-md bg-zinc-600"
-                    style={{
-                      height: inView ? `${(row.before / max) * 100}%` : '8%',
-                      transition: 'height 0.9s ease',
-                    }}
-                  />
+            <div className="flex h-40 items-end gap-3">
+              {[row.before, row.after].map((bar, index) => (
+                <div key={bar.label} className="flex flex-1 flex-col items-center gap-2">
+                  <p className="font-mono text-xs text-mist-50">{bar.label}</p>
+                  <div className="flex h-28 w-full items-end rounded-md bg-white/5">
+                    <div
+                      className={`w-full rounded-md ${index === 0 ? 'bg-zinc-600' : 'bg-accent'}`}
+                      style={{
+                        height: inView ? `${(bar.value / row.max) * 100}%` : '8%',
+                        transition: `height 0.9s ease ${index * 0.1}s`,
+                      }}
+                    />
+                  </div>
+                  <span className="font-mono text-[10px] text-mist-500">
+                    {index === 0 ? viz.before : viz.after}
+                  </span>
                 </div>
-                <span className="font-mono text-[10px] text-mist-500">{viz.before}</span>
-              </div>
-              <div className="flex flex-1 flex-col items-center gap-2">
-                <div className="flex h-28 w-full items-end rounded-md bg-white/5">
-                  <div
-                    className="w-full rounded-md bg-accent"
-                    style={{
-                      height: inView ? `${(row.after / max) * 100}%` : '8%',
-                      transition: 'height 0.9s ease 0.1s',
-                    }}
-                  />
-                </div>
-                <span className="font-mono text-[10px] text-mist-500">{viz.after}</span>
-              </div>
+              ))}
             </div>
             <p className="mt-3 text-center text-sm text-mist-200">{row.name}</p>
           </div>

@@ -109,11 +109,11 @@ const en = {
     ],
     viz: {
       campaignTitle: 'Campaign performance',
-      beforeAfter: 'Before → after · index',
+      beforeAfter: 'Before → after · approx.',
       before: 'Before',
       after: 'After',
       campaignNote:
-        'Relative index of confirmed results (−30% CPL, +15% ROI). Not a campaign-level dataset.',
+        'Approximate figures based on confirmed results (−30% CPL, +15% ROI). Not a campaign-level dataset.',
       funnel: ['Acquisition', 'Install', 'Activation', 'Purchase', 'Retention'],
       funnelTags: ['Funnel', 'Cohorts', 'LTV', 'Retention'],
       illustrative: 'Illustrative visualization',
@@ -323,11 +323,11 @@ const ru: Copy = {
     ],
     viz: {
       campaignTitle: 'Эффективность кампаний',
-      beforeAfter: 'До → после · индекс',
+      beforeAfter: 'До → после · оценка',
       before: 'До',
       after: 'После',
       campaignNote:
-        'Относительный индекс подтверждённых результатов (−30% CPL, +15% ROI). Это не датасет по отдельным кампаниям.',
+        'Примерные показатели на основе подтверждённых результатов (−30% CPL, +15% ROI). Это не датасет по отдельным кампаниям.',
       funnel: ['Acquisition', 'Install', 'Activation', 'Purchase', 'Retention'],
       funnelTags: ['Воронка', 'Когорты', 'LTV', 'Retention'],
       illustrative: 'Иллюстративная визуализация',
