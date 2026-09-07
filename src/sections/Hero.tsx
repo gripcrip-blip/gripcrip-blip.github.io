@@ -1,5 +1,4 @@
 import { ArrowDown, Download } from 'lucide-react'
-import { useState } from 'react'
 import { cvPath } from '../data/site'
 import { useLanguage } from '../i18n/LanguageProvider'
 
@@ -20,7 +19,6 @@ function DataGrid() {
 
 export function Hero() {
   const { t } = useLanguage()
-  const [active, setActive] = useState<string | null>(null)
 
   return (
     <section
@@ -66,31 +64,17 @@ export function Hero() {
             {t.hero.flowTitle}
           </p>
           <ol className="space-y-0">
-            {t.hero.flow.map((step, index) => {
-              const isOn = active === step
-              return (
-                <li key={step}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActive(step)}
-                    onMouseLeave={() => setActive(null)}
-                    onFocus={() => setActive(step)}
-                    onBlur={() => setActive(null)}
-                    className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition ${
-                      isOn
-                        ? 'border-accent/40 bg-accent/10 text-mist-50'
-                        : 'border-white/10 bg-transparent text-mist-200 hover:border-white/20'
-                    }`}
-                  >
-                    <span className="text-sm font-medium">{step}</span>
-                    <span className="font-mono text-[10px] text-mist-500">0{index + 1}</span>
-                  </button>
-                  {index < t.hero.flow.length - 1 ? (
-                    <div className="mx-auto h-4 w-px bg-white/10" aria-hidden="true" />
-                  ) : null}
-                </li>
-              )
-            })}
+            {t.hero.flow.map((step, index) => (
+              <li key={step}>
+                <div className="flex w-full items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-mist-200">
+                  <span className="text-sm font-medium">{step}</span>
+                  <span className="font-mono text-[10px] text-mist-500">0{index + 1}</span>
+                </div>
+                {index < t.hero.flow.length - 1 ? (
+                  <div className="mx-auto h-4 w-px bg-white/10" aria-hidden="true" />
+                ) : null}
+              </li>
+            ))}
           </ol>
           <div className="mt-6 flex items-center justify-between gap-4">
             <DataGrid />

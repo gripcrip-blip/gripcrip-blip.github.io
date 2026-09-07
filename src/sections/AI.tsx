@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import { Reveal } from '../components/Reveal'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 export function AI() {
   const { t } = useLanguage()
-  const [active, setActive] = useState<string | null>(null)
 
   return (
     <section id="ai" className="border-y border-white/10 px-5 py-20 md:px-8 md:py-28">
@@ -27,19 +25,10 @@ export function AI() {
             <ol>
               {t.ai.flow.map((step, index) => (
                 <li key={step}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActive(step)}
-                    onFocus={() => setActive(step)}
-                    onMouseLeave={() => setActive(null)}
-                    onBlur={() => setActive(null)}
-                    className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-mono text-sm tracking-wide transition ${
-                      active === step ? 'bg-accent/10 text-accent' : 'text-mist-200 hover:bg-white/5'
-                    }`}
-                  >
+                  <div className="flex w-full items-center justify-between rounded-xl px-4 py-3 font-mono text-sm tracking-wide text-mist-200">
                     <span>{step}</span>
                     <span className="text-[10px] text-mist-500">0{index + 1}</span>
-                  </button>
+                  </div>
                   {index < t.ai.flow.length - 1 ? (
                     <p className="px-4 font-mono text-xs text-mist-500" aria-hidden="true">
                       ↓
