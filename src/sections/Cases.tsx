@@ -1,27 +1,25 @@
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
-import { commercialCases } from '../data/site'
 import { useInView } from '../hooks/useInView'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 const relativeChange = [
   { name: 'CPL', before: 100, after: 70 },
   { name: 'ROI', before: 100, after: 115 },
 ]
 
-const funnel = ['Acquisition', 'Install', 'Activation', 'Purchase', 'Retention'] as const
-const biFlow = ['Data', 'SQL / Python', 'Power BI', 'Dashboard', 'Decision'] as const
-const dataLayer = ['MySQL', 'ETL', 'Transformation', 'Data marts', 'SQL optimization', 'Data quality'] as const
-
 function CampaignViz() {
+  const { t } = useLanguage()
   const { ref, inView } = useInView<HTMLDivElement>(0.35)
   const max = 130
+  const { viz } = t.cases
 
   return (
     <div ref={ref} className="mt-8 rounded-xl border border-white/10 bg-ink-950/60 p-4">
       <div className="mb-3 flex items-center justify-between gap-3">
-        <p className="text-sm text-mist-200">Campaign performance</p>
+        <p className="text-sm text-mist-200">{viz.campaignTitle}</p>
         <p className="font-mono text-[10px] uppercase tracking-widest text-mist-500">
-          Before → after · index
+          {viz.beforeAfter}
         </p>
       </div>
       <div className="grid grid-cols-2 gap-8 px-2 pb-2 pt-4">
@@ -32,39 +30,45 @@ function CampaignViz() {
                 <div className="flex h-28 w-full items-end rounded-md bg-white/5">
                   <div
                     className="w-full rounded-md bg-zinc-600"
-                    style={{ height: inView ? `${(row.before / max) * 100}%` : '8%', transition: 'height 0.9s ease' }}
+                    style={{
+                      height: inView ? `${(row.before / max) * 100}%` : '8%',
+                      transition: 'height 0.9s ease',
+                    }}
                   />
                 </div>
-                <span className="font-mono text-[10px] text-mist-500">Before</span>
+                <span className="font-mono text-[10px] text-mist-500">{viz.before}</span>
               </div>
               <div className="flex flex-1 flex-col items-center gap-2">
                 <div className="flex h-28 w-full items-end rounded-md bg-white/5">
                   <div
                     className="w-full rounded-md bg-accent"
-                    style={{ height: inView ? `${(row.after / max) * 100}%` : '8%', transition: 'height 0.9s ease 0.1s' }}
+                    style={{
+                      height: inView ? `${(row.after / max) * 100}%` : '8%',
+                      transition: 'height 0.9s ease 0.1s',
+                    }}
                   />
                 </div>
-                <span className="font-mono text-[10px] text-mist-500">After</span>
+                <span className="font-mono text-[10px] text-mist-500">{viz.after}</span>
               </div>
             </div>
             <p className="mt-3 text-center text-sm text-mist-200">{row.name}</p>
           </div>
         ))}
       </div>
-      <p className="mt-2 font-mono text-[10px] leading-relaxed text-mist-500">
-        Relative index of confirmed results (−30% CPL, +15% ROI). Not a campaign-level dataset.
-      </p>
+      <p className="mt-2 font-mono text-[10px] leading-relaxed text-mist-500">{viz.campaignNote}</p>
     </div>
   )
 }
 
 function FunnelViz() {
+  const { t } = useLanguage()
   const { ref, inView } = useInView<HTMLDivElement>(0.3)
+  const { viz } = t.cases
 
   return (
     <div ref={ref} className="mt-8">
       <div className="space-y-2">
-        {funnel.map((step, i) => (
+        {viz.funnel.map((step, i) => (
           <div key={step}>
             <div
               className="rounded-lg border border-white/10 bg-ink-800 px-4 py-2.5 text-sm text-mist-200"
@@ -72,15 +76,18 @@ function FunnelViz() {
             >
               {step}
             </div>
-            {i < funnel.length - 1 ? (
+            {i < viz.funnel.length - 1 ? (
               <div className="mx-auto h-3 w-px bg-white/15" aria-hidden="true" />
             ) : null}
           </div>
         ))}
       </div>
       <div className="mt-5 flex flex-wrap gap-2">
-        {['Funnel', 'Cohorts', 'LTV', 'Retention'].map((tag) => (
-          <span key={tag} className="rounded-full border border-white/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-mist-400">
+        {viz.funnelTags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border border-white/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-mist-400"
+          >
             {tag}
           </span>
         ))}
@@ -98,20 +105,23 @@ function FunnelViz() {
           />
         </svg>
       </div>
-      <p className="mt-2 font-mono text-[10px] text-mist-500">Illustrative visualization</p>
+      <p className="mt-2 font-mono text-[10px] text-mist-500">{viz.illustrative}</p>
     </div>
   )
 }
 
 function BiViz() {
+  const { t } = useLanguage()
+  const flow = t.cases.viz.biFlow
+
   return (
     <div className="mt-8 space-y-0">
-      {biFlow.map((step, i) => (
+      {flow.map((step, i) => (
         <div key={step} className="text-center">
           <div className="rounded-lg border border-white/10 bg-ink-800 px-3 py-2 font-mono text-xs tracking-wide text-mist-200">
             {step}
           </div>
-          {i < biFlow.length - 1 ? (
+          {i < flow.length - 1 ? (
             <div className="mx-auto h-4 w-px bg-accent/40" aria-hidden="true" />
           ) : null}
         </div>
@@ -121,9 +131,11 @@ function BiViz() {
 }
 
 function DataViz() {
+  const { t } = useLanguage()
+
   return (
     <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
-      {dataLayer.map((item) => (
+      {t.cases.viz.dataLayer.map((item) => (
         <div
           key={item}
           className="rounded-xl border border-white/10 bg-ink-800/80 px-3 py-4 text-sm text-mist-200"
@@ -143,17 +155,19 @@ function CaseVisual({ id }: { id: string }) {
 }
 
 export function Cases() {
+  const { t } = useLanguage()
+
   return (
     <section id="work" className="border-t border-white/10 px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-page">
         <SectionHeading
-          eyebrow="Selected work"
-          title="Commercial experience"
-          description="Results taken from production work. No synthetic case studies presented as client delivery."
+          eyebrow={t.cases.eyebrow}
+          title={t.cases.title}
+          description={t.cases.description}
         />
 
         <div className="grid gap-5 lg:grid-cols-2">
-          {commercialCases.map((item, index) => (
+          {t.cases.items.map((item, index) => (
             <Reveal
               key={item.id}
               delayMs={index * 70}
@@ -162,7 +176,7 @@ export function Cases() {
               <article className="h-full rounded-2xl border border-white/10 bg-ink-900/60 p-6 transition hover:border-white/20 md:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-accent">
-                    Case {item.number} · {item.category}
+                    {t.cases.caseLabel} {item.number} · {item.category}
                   </p>
                 </div>
                 <h3 className="mt-4 max-w-xl text-2xl font-medium tracking-tight text-mist-50 md:text-3xl">

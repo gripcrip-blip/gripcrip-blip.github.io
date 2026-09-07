@@ -1,15 +1,17 @@
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
-import { experience } from '../data/site'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 export function Experience() {
+  const { t } = useLanguage()
+
   return (
     <section id="experience" className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-page">
-        <SectionHeading eyebrow="Now" title="Experience" />
+        <SectionHeading eyebrow={t.experience.eyebrow} title={t.experience.title} />
 
         <ol className="relative border-l border-white/10 pl-6 md:pl-8">
-          {experience.map((item, index) => (
+          {t.experience.items.map((item, index) => (
             <li key={item.id} className="relative mb-12 last:mb-0">
               <span
                 className={`absolute -left-[1.7rem] top-1.5 h-2.5 w-2.5 rounded-full md:-left-[2.2rem] ${

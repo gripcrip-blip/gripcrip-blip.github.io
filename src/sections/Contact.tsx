@@ -1,39 +1,44 @@
 import { Linkedin, Mail, Send } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
 import { contacts } from '../data/site'
-
-const items = [
-  {
-    label: 'Telegram',
-    href: contacts.telegram,
-    detail: contacts.telegramLabel,
-    icon: Send,
-  },
-  {
-    label: 'LinkedIn',
-    href: contacts.linkedin,
-    detail: contacts.linkedinLabel,
-    icon: Linkedin,
-  },
-  {
-    label: 'Email',
-    href: `mailto:${contacts.email}`,
-    detail: contacts.email,
-    icon: Mail,
-  },
-]
+import { useLanguage } from '../i18n/LanguageProvider'
 
 export function Contact() {
+  const { t } = useLanguage()
+
+  const items = [
+    {
+      label: 'Telegram',
+      href: contacts.telegram,
+      detail: contacts.telegramLabel,
+      icon: Send,
+    },
+    {
+      label: 'LinkedIn',
+      href: contacts.linkedin,
+      detail: contacts.linkedinLabel,
+      icon: Linkedin,
+    },
+    {
+      label: 'Email',
+      href: `mailto:${contacts.email}`,
+      detail: contacts.email,
+      icon: Mail,
+    },
+  ]
+
   return (
     <section id="contact" className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-page">
         <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-accent">Contact</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-accent">
+            {t.contact.eyebrow}
+          </p>
           <h2 className="mt-4 max-w-xl text-4xl font-medium tracking-tight text-mist-50 md:text-5xl">
-            Let&apos;s work with data.
+            {t.contact.title}
           </h2>
           <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-mist-500">
-            Data Analytics · Marketing Analytics · AI · Automation
+            {t.contact.line}
           </p>
         </Reveal>
 

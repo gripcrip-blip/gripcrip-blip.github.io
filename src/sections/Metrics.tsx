@@ -1,12 +1,14 @@
 import { MetricNumber } from '../components/MetricNumber'
 import { metrics } from '../data/site'
 import { useInView } from '../hooks/useInView'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 export function Metrics() {
+  const { t } = useLanguage()
   const { ref, inView } = useInView<HTMLElement>(0.25)
 
   return (
-    <section ref={ref} aria-label="Key results" className="border-y border-white/10">
+    <section ref={ref} aria-label={t.metrics.aria} className="border-y border-white/10">
       <div className="mx-auto grid max-w-page grid-cols-2 gap-px bg-white/10 md:grid-cols-3 lg:grid-cols-6">
         {metrics.map((metric, index) => (
           <article key={metric.id} className="bg-ink-950 px-5 py-8 md:px-6 md:py-10">
@@ -21,7 +23,9 @@ export function Metrics() {
                 active={inView}
               />
             </p>
-            <p className="mt-3 max-w-[9.5rem] text-sm leading-snug text-mist-400">{metric.label}</p>
+            <p className="mt-3 max-w-[9.5rem] text-sm leading-snug text-mist-400">
+              {t.metrics.labels[metric.id]}
+            </p>
           </article>
         ))}
       </div>

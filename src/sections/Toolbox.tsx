@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
-import { skillFilters, skills, type SkillGroup } from '../data/site'
+import { skills, type SkillGroup } from '../data/site'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 export function Toolbox() {
+  const { t } = useLanguage()
   const [filter, setFilter] = useState<'all' | SkillGroup>('all')
 
   const visible = useMemo(
@@ -15,13 +17,13 @@ export function Toolbox() {
     <section id="stack" className="border-t border-white/10 px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-page">
         <SectionHeading
-          eyebrow="Toolbox"
-          title="Stack"
-          description="Tools used in analytics, marketing measurement, data engineering and AI-assisted building."
+          eyebrow={t.toolbox.eyebrow}
+          title={t.toolbox.title}
+          description={t.toolbox.description}
         />
 
-        <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Skill filters">
-          {skillFilters.map((item) => {
+        <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label={t.toolbox.filtersAria}>
+          {t.toolbox.filters.map((item) => {
             const on = filter === item.id
             return (
               <button
@@ -29,7 +31,7 @@ export function Toolbox() {
                 type="button"
                 role="tab"
                 aria-selected={on}
-                onClick={() => setFilter(item.id)}
+                onClick={() => setFilter(item.id as 'all' | SkillGroup)}
                 className={`rounded-full border px-4 py-2 font-mono text-[11px] tracking-[0.18em] transition ${
                   on
                     ? 'border-accent/40 bg-accent/10 text-accent'

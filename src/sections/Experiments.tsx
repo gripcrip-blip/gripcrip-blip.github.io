@@ -1,19 +1,21 @@
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
-import { experiments } from '../data/site'
+import { useLanguage } from '../i18n/LanguageProvider'
 
 export function Experiments() {
+  const { t } = useLanguage()
+
   return (
     <section id="exploring" className="px-5 py-20 md:px-8 md:py-24">
       <div className="mx-auto max-w-page">
         <SectionHeading
-          eyebrow="Experimental"
-          title="Currently exploring"
-          description="Separate from commercial experience. These are learning directions and future pet-project slots — not claimed as shipped client work."
+          eyebrow={t.experiments.eyebrow}
+          title={t.experiments.title}
+          description={t.experiments.description}
         />
 
         <div className="grid gap-4 sm:grid-cols-2">
-          {experiments.map((item, index) => (
+          {t.experiments.items.map((item, index) => (
             <Reveal key={item.id} delayMs={index * 60}>
               <article className="h-full rounded-2xl border border-dashed border-white/15 bg-ink-900/30 p-6">
                 <div className="flex items-center justify-between gap-3">
