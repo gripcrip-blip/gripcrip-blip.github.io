@@ -1,5 +1,5 @@
-import { ArrowDown, Download } from 'lucide-react'
-import { cvPath } from '../data/site'
+import { ArrowDown } from 'lucide-react'
+import { DownloadCvButton } from '../components/DownloadCvButton'
 import { useLanguage } from '../i18n/LanguageProvider'
 
 function DataGrid() {
@@ -48,14 +48,9 @@ export function Hero() {
               {t.hero.viewCases}
               <ArrowDown size={16} aria-hidden="true" />
             </a>
-            <a
-              href={cvPath}
-              download
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm text-mist-50 transition hover:border-accent/50 hover:bg-accent/10"
-            >
-              <Download size={16} aria-hidden="true" />
-              {t.hero.download}
-            </a>
+            <DownloadCvButton
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm text-mist-50 transition hover:border-accent/50 hover:bg-accent/10 disabled:opacity-60"
+            />
           </div>
         </div>
 

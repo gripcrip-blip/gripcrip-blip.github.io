@@ -47,13 +47,7 @@ src/data/site.ts
 
 ## Download CV
 
-The **Download CV** button points to `public/cv.pdf`.
-
-If you replace the resume, overwrite that file:
-
-```text
-Place your CV as public/cv.pdf
-```
+The **Download CV** button generates a PDF of the landing page in the current language (EN/RU). It is not the HeadHunter resume file.
 
 ## Deployment
 
@@ -109,5 +103,4 @@ src/
   hooks/
   styles/
 public/
-  cv.pdf
 ```

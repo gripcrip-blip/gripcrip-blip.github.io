@@ -8,8 +8,6 @@ export const contacts = {
   phoneHref: 'tel:+79964971839',
 } as const
 
-export const cvPath = './cv.pdf'
-
 export const metrics = [
   { id: 'campaigns', value: 180, prefix: '', suffix: '+' },
   { id: 'cpl', value: 30, prefix: '−', suffix: '%' },

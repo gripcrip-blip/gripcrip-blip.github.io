@@ -1,7 +1,7 @@
-import { Download, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { cvPath } from '../data/site'
 import { useLanguage } from '../i18n/LanguageProvider'
+import { DownloadCvButton } from './DownloadCvButton'
 import { LanguageToggle } from './LanguageToggle'
 
 export function Header() {
@@ -52,14 +52,10 @@ export function Header() {
             </a>
           ))}
           <LanguageToggle />
-          <a
-            href={cvPath}
-            download
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-mist-50 transition hover:border-accent/50 hover:bg-accent/10"
-          >
-            <Download size={14} aria-hidden="true" />
-            {t.nav.download}
-          </a>
+          <DownloadCvButton
+            iconSize={14}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-mist-50 transition hover:border-accent/50 hover:bg-accent/10 disabled:opacity-60"
+          />
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
@@ -94,15 +90,10 @@ export function Header() {
                 {link.label}
               </a>
             ))}
-            <a
-              href={cvPath}
-              download
-              className="inline-flex items-center gap-2 pt-2 text-accent"
-              onClick={() => setOpen(false)}
-            >
-              <Download size={16} aria-hidden="true" />
-              {t.nav.download}
-            </a>
+            <DownloadCvButton
+              iconSize={16}
+              className="inline-flex items-center gap-2 pt-2 text-left text-accent disabled:opacity-60"
+            />
           </div>
         </nav>
       ) : null}
